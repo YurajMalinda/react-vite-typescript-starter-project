@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run lint
+
+# Run format check, and if it fails, automatically fix formatting
+if ! npm run format:check; then
+  echo "Format check failed. Automatically fixing formatting..."
+  npm run format
+  echo "Formatting fixed. Re-checking..."
+  npm run format:check
+fi
